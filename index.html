@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f3b4c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SIMS Interventionnel 2025 — Fiches résumés</title>
+<link rel="icon" href="assets/icon.svg">
+<link rel="apple-touch-icon" href="assets/icon.svg">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#14212b;--mute:#5d6b76;--line:#e1e6ea;--brand:#e8641b;--teal:#0f3b4c;--teal2:#1f7a8c;
+--warn:#fff3e6;--warnb:#e8641b;--tip:#e8f6f0;--tipb:#1d9a6c;--imp:#eaf1fb;--impb:#2f6fd6;--rad:14px}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1419;--card:#16212a;--ink:#e8eef2;--mute:#9aaab6;--line:#26343f;--warn:#33240f;--tip:#0f2a20;--imp:#14243b}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overscroll-behavior-y:contain;overflow-x:hidden}
+button,a,.card,.chip{touch-action:manipulation}
+a{color:var(--teal2)}
+header{background:linear-gradient(135deg,var(--teal),#164f63 60%,var(--brand));color:#fff;padding:calc(18px + env(safe-area-inset-top)) 16px 16px}
+header h1{margin:0;font-size:1.25rem;line-height:1.25}
+header p{margin:.25rem 0 0;opacity:.85;font-size:.85rem}
+.wrap{max-width:980px;margin:0 auto;padding:12px}
+.search{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 12px 6px;max-width:980px;margin:0 auto}
+.search input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 11px;border-radius:999px;font-size:.8rem;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.sess{margin:18px 0 8px}
+.sess h2{font-size:.95rem;margin:0;color:var(--brand);text-transform:uppercase;letter-spacing:.02em}
+.sess small{color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s}
+.card:active{transform:scale(.985)}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#ccd;display:block}
+.card .b{padding:10px 12px}
+.card .h{font-size:.75rem;color:var(--mute)}
+.card .t{font-weight:650;font-size:.95rem;line-height:1.3;margin:2px 0 4px}
+.card .s{font-size:.82rem;color:var(--mute);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:.68rem;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--mute)}
+/* fiche */
+#fiche{position:fixed;inset:0;background:var(--bg);z-index:20;overflow-y:auto;overscroll-behavior:contain;display:none}
+#fiche.open{display:block}
+.fbar{position:sticky;top:0;z-index:2;display:flex;gap:8px;align-items:center;padding:calc(8px + env(safe-area-inset-top)) 10px 8px;background:var(--teal);color:#fff}
+.fbar button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-size:.9rem;cursor:pointer}
+.fbar .sp{flex:1;font-size:.8rem;opacity:.85;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.fhead{background:linear-gradient(135deg,var(--teal),#164f63);color:#fff;padding:18px 16px 20px}
+.fhead .k{font-size:.75rem;text-transform:uppercase;opacity:.8;letter-spacing:.03em}
+.fhead h1{font-size:1.3rem;margin:.3rem 0;line-height:1.25}
+.fhead .o{font-size:.9rem;opacity:.9}
+.fbody{max-width:860px;margin:0 auto;padding:14px 12px 60px}
+.tldr{background:var(--card);border-left:5px solid var(--brand);border-radius:10px;padding:12px 14px;font-size:.98rem;margin-bottom:14px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0}
+.num{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.num b{display:block;font-size:1.35rem;color:var(--brand);line-height:1.2}
+.num span{font-size:.75rem;color:var(--mute)}
+section.blk{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:12px 14px;margin:12px 0}
+section.blk h3{margin:0 0 6px;font-size:.95rem;color:var(--teal2)}
+@media (prefers-color-scheme:dark){section.blk h3{color:#6cc3d5}}
+section.blk ul,section.blk ol{margin:0;padding-left:1.2em}
+section.blk li{margin:4px 0}
+.call{border-radius:12px;padding:10px 12px;margin:10px 0;border-left:5px solid;font-size:.92rem}
+.call b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+.call.warning{background:var(--warn);border-color:var(--warnb)}
+.call.tip{background:var(--tip);border-color:var(--tipb)}
+.call.important{background:var(--imp);border-color:var(--impb)}
+figure{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden}
+figure img{width:100%;display:block;cursor:zoom-in}
+figcaption{padding:8px 12px;font-size:.82rem;color:var(--mute)}
+.src{font-size:.78rem;color:var(--mute);margin-top:16px}
+.pn{display:flex;gap:8px;margin-top:16px}
+.pn button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:.85rem;cursor:pointer;text-align:left}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:40;display:none;align-items:center;justify-content:center}
+#lb.open{display:flex}
+#lb img{max-width:100%;max-height:100%;touch-action:pinch-zoom}
+#ptr{position:fixed;top:0;left:50%;transform:translate(-50%,-60px);background:var(--teal);color:#fff;border-radius:999px;padding:6px 14px;font-size:.8rem;z-index:50;transition:transform .15s}
+.empty{text-align:center;color:var(--mute);padding:40px 0}
+footer{text-align:center;color:var(--mute);font-size:.75rem;padding:20px}
+@media print{header,.search,.fbar,.pn,#ptr,.wrap,footer{display:none!important}#fiche{position:static;display:block!important;overflow:visible}body{background:#fff}figure{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div id="ptr">↻ Actualisation…</div>
+<header>
+  <h1>🩻 SIMS — Actualités en imagerie interventionnelle</h1>
+  <p>4ᵉ journée · Paris, École militaire · 13 décembre 2025 · Fiches résumés illustrées</p>
+</header>
+<div class="search">
+  <input id="q" type="search" placeholder="Rechercher (geste, orateur, structure…)" autocomplete="off">
+  <div class="chips" id="chips"></div>
+</div>
+<main class="wrap" id="list"></main>
+<footer>Résumés personnels réalisés à partir des vidéos de la journée SIMS (usage pédagogique interne).</footer>
+<div id="fiche"></div>
+<div id="lb"><img alt=""></div>
+<script src="data/embedded_data.js"></script>
+<script>
+const D = window.SIMS_DATA; const F = D.fiches; const S = Object.fromEntries(D.sessions.map(s=>[s.id,s]));
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = t => { t=Math.round(t||0); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(s).padStart(2,'0'); };
+let filt='all';
+const tags=[...new Set(F.flatMap(f=>f.tags||[]))].sort((a,b)=>a.localeCompare(b,'fr'));
+function chips(){
+  const c=document.getElementById('chips');
+  c.innerHTML=['all',...tags].map(t=>`<button class="chip ${t===filt?'on':''}" data-t="${esc(t)}">${t==='all'?'Toutes ('+F.length+')':esc(t)}</button>`).join('');
+  c.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filt=b.dataset.t;chips();list();});
+}
+function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
+function list(){
+  const q=norm(document.getElementById('q').value.trim());
+  const el=document.getElementById('list'); let h='';
+  for(const s of D.sessions){
+    const fs=F.filter(f=>f.session===s.id && (filt==='all'||(f.tags||[]).includes(filt)) && (!q||norm(JSON.stringify(f)).includes(q)));
+    if(!fs.length) continue;
+    h+=`<div class="sess"><h2>${esc(s.titre)}</h2><small>${esc(s.horaire||'')} · ${fs.length} fiche${fs.length>1?'s':''}</small></div><div class="grid">`;
+    for(const f of fs){
+      const img=(f.images||[])[0];
+      h+=`<div class="card" data-id="${f.id}">${img?`<img loading="lazy" src="${esc(img.src)}" alt="">`:''}<div class="b"><div class="h">${esc(f.horaire)} · ${esc(f.orateur)}</div><div class="t">${esc(f.titre)}</div><div class="s">${esc(f.resume)}</div><div class="tags">${(f.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div></div>`;
+    }
+    h+='</div>';
+  }
+  el.innerHTML=h||'<div class="empty">Aucune fiche ne correspond.</div>';
+  el.querySelectorAll('.card').forEach(c=>c.onclick=()=>{location.hash='f/'+c.dataset.id;});
+}
+const lab={warning:'⚠️ Attention',tip:'💡 Astuce',important:'❗ Important'};
+function ul(a,tag='ul'){return `<${tag}>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</${tag}>`;}
+function open(id){
+  const i=F.findIndex(f=>f.id===id); if(i<0) return close();
+  const f=F[i], s=S[f.session], p=F[i-1], n=F[i+1];
+  let h=`<div class="fbar"><button id="bk">← Fiches</button><span class="sp">${esc(s.titre)}</span><button onclick="print()">🖨️</button></div>
+  <div class="fhead"><div class="k">${esc(s.titre)} · ${esc(f.horaire)}</div><h1>${esc(f.titre)}</h1><div class="o">${esc(f.orateur)}</div></div><div class="fbody">`;
+  h+=`<div class="tldr">${esc(f.resume)}</div>`;
+  if(f.chiffres?.length) h+=`<div class="nums">${f.chiffres.map(c=>`<div class="num"><b>${esc(c.val)}</b><span>${esc(c.label)}</span></div>`).join('')}</div>`;
+  const imgs=f.images||[]; let k=0;
+  const fig=()=>{const im=imgs[k++]; return im?`<figure><img loading="lazy" src="${esc(im.src)}" alt="${esc(im.legende)}"><figcaption>${esc(im.legende)}</figcaption></figure>`:'';};
+  if(f.points_cles?.length) h+=`<section class="blk"><h3>🎯 Points clés</h3>${ul(f.points_cles)}</section>`;
+  h+=fig();
+  if(f.technique?.length) h+=`<section class="blk"><h3>🛠️ Technique / en pratique</h3>${ul(f.technique,'ol')}</section>`;
+  for(const a of (f.alertes||[])) h+=`<div class="call ${esc(a.type)}"><b>${lab[a.type]||''}</b>${esc(a.texte)}</div>`;
+  while(k<imgs.length) h+=fig();
+  if(f.cochin) h+=`<div class="call tip"><b>🏥 Pour notre pratique (Radio B Cochin)</b>${esc(f.cochin)}</div>`;
+  h+=`<div class="src">🎬 Vidéo « ${esc(s.titre)} » (${esc(s.duree)}) — de ${fmt(f.t_start)} à ${fmt(f.t_end)}</div>`;
+  h+=`<div class="pn">${p?`<button data-id="${p.id}">← ${esc(p.titre)}</button>`:''}${n?`<button data-id="${n.id}">${esc(n.titre)} →</button>`:''}</div></div>`;
+  const el=document.getElementById('fiche'); el.innerHTML=h; el.classList.add('open'); el.scrollTop=0; document.body.style.overflow='hidden';
+  el.querySelector('#bk').onclick=()=>{location.hash='';};
+  el.querySelectorAll('.pn button').forEach(b=>b.onclick=()=>{location.hash='f/'+b.dataset.id;});
+  el.querySelectorAll('figure img').forEach(im=>im.onclick=()=>{const lb=document.getElementById('lb');lb.querySelector('img').src=im.src;lb.classList.add('open');});
+  document.title=f.titre+' — SIMS RI 2025';
+}
+function close(){document.getElementById('fiche').classList.remove('open');document.body.style.overflow='';document.title='SIMS Interventionnel 2025 — Fiches résumés';}
+function route(){const m=location.hash.match(/^#f\/(.+)$/); m?open(decodeURIComponent(m[1])):close();}
+document.getElementById('lb').onclick=e=>e.currentTarget.classList.remove('open');
+document.getElementById('q').addEventListener('input',list);
+addEventListener('hashchange',route);
+// Pull-to-refresh (tactile + souris)
+(()=>{let y0=null,dy=0;const p=document.getElementById('ptr');
+const start=y=>{if(scrollY<=0&&!document.getElementById('fiche').classList.contains('open'))y0=y;};
+const move=y=>{if(y0===null)return;dy=Math.max(0,y-y0);p.style.transform=`translate(-50%,${Math.min(dy,90)-60}px)`;};
+const end=()=>{if(y0===null)return;if(dy>80){navigator.vibrate?.(15);location.reload();}else p.style.transform='translate(-50%,-60px)';y0=null;dy=0;};
+addEventListener('touchstart',e=>start(e.touches[0].clientY),{passive:true});addEventListener('touchmove',e=>move(e.touches[0].clientY),{passive:true});addEventListener('touchend',end);
+addEventListener('mousedown',e=>start(e.clientY));addEventListener('mousemove',e=>{if(e.buttons)move(e.clientY)});addEventListener('mouseup',end);})();
+chips();list();route();
+if('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()));
+</script>
+</body>
+</html>
