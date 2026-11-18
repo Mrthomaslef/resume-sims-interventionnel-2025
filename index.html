@@ -14,7 +14,8 @@
 --warn:#fff3e6;--warnb:#e8641b;--tip:#e8f6f0;--tipb:#1d9a6c;--imp:#eaf1fb;--impb:#2f6fd6;--rad:14px}
 @media (prefers-color-scheme:dark){:root{--bg:#0d1419;--card:#16212a;--ink:#e8eef2;--mute:#9aaab6;--line:#26343f;--warn:#33240f;--tip:#0f2a20;--imp:#14243b}}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overscroll-behavior-y:contain;overflow-x:hidden}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+@media (hover:none) and (pointer:coarse){html,body{overscroll-behavior-y:contain}}
 button,a,.card,.chip{touch-action:manipulation}
 a{color:var(--teal2)}
 header{background:linear-gradient(135deg,var(--teal),#164f63 60%,var(--brand));color:#fff;padding:calc(18px + env(safe-area-inset-top)) 16px 16px}
@@ -27,9 +28,16 @@ header p{margin:.25rem 0 0;opacity:.85;font-size:.85rem}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 11px;border-radius:999px;font-size:.8rem;cursor:pointer;white-space:nowrap}
 .chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
-.sess{margin:18px 0 8px}
-.sess h2{font-size:.95rem;margin:0;color:var(--brand);text-transform:uppercase;letter-spacing:.02em}
+.sess{margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--rad)}
+.sess summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;touch-action:manipulation;user-select:none}
+.sess summary::-webkit-details-marker{display:none}
+.sess .chev{flex:none;font-size:1.4rem;line-height:1;color:var(--brand);transition:transform .2s;width:14px}
+.sess[open] .chev{transform:rotate(90deg)}
+.sess h2{font-size:.92rem;margin:0;color:var(--brand);text-transform:uppercase;letter-spacing:.02em;line-height:1.3}
 .sess small{color:var(--mute)}
+.sess .grid{padding:0 10px 10px}
+.foldall{display:flex;justify-content:flex-end;gap:6px;margin-top:4px}
+.foldall button{border:0;background:none;color:var(--teal2);font-size:.8rem;cursor:pointer;padding:4px 6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s}
 .card:active{transform:scale(.985)}
@@ -50,7 +58,7 @@ header p{margin:.25rem 0 0;opacity:.85;font-size:.85rem}
 .fhead .k{font-size:.75rem;text-transform:uppercase;opacity:.8;letter-spacing:.03em}
 .fhead h1{font-size:1.3rem;margin:.3rem 0;line-height:1.25}
 .fhead .o{font-size:.9rem;opacity:.9}
-.fbody{max-width:860px;margin:0 auto;padding:14px 12px 60px}
+.fbody{max-width:860px;margin:0 auto;padding:14px 12px calc(60px + env(safe-area-inset-bottom))}
 .tldr{background:var(--card);border-left:5px solid var(--brand);border-radius:10px;padding:12px 14px;font-size:.98rem;margin-bottom:14px}
 .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0}
 .num{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
@@ -75,14 +83,15 @@ figcaption{padding:8px 12px;font-size:.82rem;color:var(--mute)}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:40;display:none;align-items:center;justify-content:center}
 #lb.open{display:flex}
 #lb img{max-width:100%;max-height:100%;touch-action:pinch-zoom}
-#ptr{position:fixed;top:0;left:50%;transform:translate(-50%,-60px);background:var(--teal);color:#fff;border-radius:999px;padding:6px 14px;font-size:.8rem;z-index:50;transition:transform .15s}
+#ptr{position:fixed;top:0;left:50%;width:34px;height:34px;margin-left:-17px;display:flex;align-items:center;justify-content:center;background:var(--card);color:var(--teal2);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:50;opacity:0;transform:translateY(-50px)}
+#ptr.spin svg{animation:sp .7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .empty{text-align:center;color:var(--mute);padding:40px 0}
-footer{text-align:center;color:var(--mute);font-size:.75rem;padding:20px}
+footer{text-align:center;color:var(--mute);font-size:.75rem;padding:20px 20px calc(28px + env(safe-area-inset-bottom))}
 @media print{header,.search,.fbar,.pn,#ptr,.wrap,footer{display:none!important}#fiche{position:static;display:block!important;overflow:visible}body{background:#fff}figure{break-inside:avoid}}
 </style>
 </head>
 <body>
-<div id="ptr">↻ Actualisation…</div>
+<div id="ptr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></div>
 <header>
   <h1>🩻 SIMS — Actualités en imagerie interventionnelle</h1>
   <p>4ᵉ journée · Paris, École militaire · 13 décembre 2025 · Fiches résumés illustrées</p>
@@ -101,6 +110,7 @@ const D = window.SIMS_DATA; const F = D.fiches; const S = Object.fromEntries(D.s
 const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = t => { t=Math.round(t||0); const h=Math.floor(t/3600), m=Math.floor(t%3600/60), s=t%60; return (h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(s).padStart(2,'0'); };
 let filt='all';
+const openS=new Set(JSON.parse(localStorage.getItem('sims_open')||'[]'));
 const tags=[...new Set(F.flatMap(f=>f.tags||[]))].sort((a,b)=>a.localeCompare(b,'fr'));
 function chips(){
   const c=document.getElementById('chips');
@@ -114,14 +124,22 @@ function list(){
   for(const s of D.sessions){
     const fs=F.filter(f=>f.session===s.id && (filt==='all'||(f.tags||[]).includes(filt)) && (!q||norm(JSON.stringify(f)).includes(q)));
     if(!fs.length) continue;
-    h+=`<div class="sess"><h2>${esc(s.titre)}</h2><small>${esc(s.horaire||'')} · ${fs.length} fiche${fs.length>1?'s':''}</small></div><div class="grid">`;
+    const isOpen=(q||filt!=='all')||openS.has(s.id);
+    h+=`<details class="sess" data-s="${s.id}" ${isOpen?'open':''}><summary><span class="chev">›</span><span class="st"><h2>${esc(s.titre)}</h2><small>${esc(s.horaire||'')} · ${fs.length} fiche${fs.length>1?'s':''}</small></span></summary><div class="grid">`;
     for(const f of fs){
       const img=(f.images||[])[0];
       h+=`<div class="card" data-id="${f.id}">${img?`<img loading="lazy" src="${esc(img.src)}" alt="">`:''}<div class="b"><div class="h">${esc(f.horaire)} · ${esc(f.orateur)}</div><div class="t">${esc(f.titre)}</div><div class="s">${esc(f.resume)}</div><div class="tags">${(f.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div></div>`;
     }
-    h+='</div>';
+    h+='</div></details>';
   }
-  el.innerHTML=h||'<div class="empty">Aucune fiche ne correspond.</div>';
+  const all=!(q||filt!=='all');
+  el.innerHTML=h?(all?'<div class="foldall"><button data-a="1">Tout déplier</button><button data-a="0">Tout replier</button></div>':'')+h:'<div class="empty">Aucune fiche ne correspond.</div>';
+  el.querySelectorAll('.foldall button').forEach(b=>b.onclick=()=>{openS.clear();if(b.dataset.a==='1')D.sessions.forEach(x=>openS.add(x.id));localStorage.setItem('sims_open',JSON.stringify([...openS]));list();});
+  el.querySelectorAll('details.sess').forEach(d=>d.addEventListener('toggle',()=>{
+    if(q||filt!=='all') return;
+    d.open?openS.add(d.dataset.s):openS.delete(d.dataset.s);
+    localStorage.setItem('sims_open',JSON.stringify([...openS]));
+  }));
   el.querySelectorAll('.card').forEach(c=>c.onclick=()=>{location.hash='f/'+c.dataset.id;});
 }
 const lab={warning:'⚠️ Attention',tip:'💡 Astuce',important:'❗ Important'};
@@ -157,8 +175,8 @@ addEventListener('hashchange',route);
 // Pull-to-refresh (tactile + souris)
 (()=>{let y0=null,dy=0;const p=document.getElementById('ptr');
 const start=y=>{if(scrollY<=0&&!document.getElementById('fiche').classList.contains('open'))y0=y;};
-const move=y=>{if(y0===null)return;dy=Math.max(0,y-y0);p.style.transform=`translate(-50%,${Math.min(dy,90)-60}px)`;};
-const end=()=>{if(y0===null)return;if(dy>80){navigator.vibrate?.(15);location.reload();}else p.style.transform='translate(-50%,-60px)';y0=null;dy=0;};
+const move=y=>{if(y0===null)return;dy=Math.max(0,y-y0);p.style.opacity=Math.min(dy/80,1);p.style.transform=`translateY(${Math.min(dy,90)-50}px) rotate(${dy*3}deg)`;};
+const end=()=>{if(y0===null)return;if(dy>80){navigator.vibrate?.(15);p.classList.add('spin');location.reload();}else{p.style.opacity=0;p.style.transform='translateY(-50px)';}y0=null;dy=0;};
 addEventListener('touchstart',e=>start(e.touches[0].clientY),{passive:true});addEventListener('touchmove',e=>move(e.touches[0].clientY),{passive:true});addEventListener('touchend',end);
 addEventListener('mousedown',e=>start(e.clientY));addEventListener('mousemove',e=>{if(e.buttons)move(e.clientY)});addEventListener('mouseup',end);})();
 chips();list();route();
